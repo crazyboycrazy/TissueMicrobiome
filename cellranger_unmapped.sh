@@ -8,7 +8,7 @@ cd ../
 ~/cellranger-7.0.1/cellranger count --id=${sample_name}_cellranger --sample=${sample_name} --fastqs=${i}  --transcriptome=/home/junwoojo/refdata-gex-GRCh38-2020-A/ --localcores=10
 done
 
-
+echo "completed"
 
 
 
