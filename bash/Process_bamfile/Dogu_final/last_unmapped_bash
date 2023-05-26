@@ -1,0 +1,9 @@
+samtools view -h -f 4  human.sam > last_unmapped.sam
+wait
+samtools flagstat last_unmapped.sam > flagstat2.txt  &
+samtools fastq  last_unmapped.sam > unmapped2.fastq
+wait
+repair.sh -eoom -Xmx80g  in=unmapped2.fastq  out=f_last.fq out2=r_last.fq
+
+wait
+rm unmapped2.fastq last_unmapped.sam

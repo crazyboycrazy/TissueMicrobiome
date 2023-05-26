@@ -1,0 +1,1 @@
+bowtie2 -x ~/human_bowtie2/human -p 10   -S human.sam -U clean1.fq,clean2.fq

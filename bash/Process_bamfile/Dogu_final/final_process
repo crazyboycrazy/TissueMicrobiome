@@ -1,0 +1,122 @@
+#https://sourceforge.net/projects/bbmap/ bbduck download
+#bowtie reference link
+
+
+
+export PATH=/bin/:$PATH
+for i in $(ls|grep TCGA)
+do cd $i
+if [ $(ls|grep -E  "fq|human.sam"|wc -l) -gt 0 ]
+then
+echo "$i unmapped.sh already done"
+cd ../
+continue
+fi
+echo "$i unmapped.sh  processing now"
+bash ../unmapped.sh
+echo "$i unmapped.sh completed"
+cd ../
+done
+
+
+
+wait
+
+for i in $(ls|grep TCGA)
+do cd $i
+if [ $(ls|grep -E "f.fq|clean"|wc -l) -gt 0 ]
+then
+echo "$i  proces_bash already done"
+cd ../
+continue
+fi
+echo "$i process_bash processing now"
+bash ../process_bash
+echo "$i process_bash  completed"
+cd ../
+done
+
+
+wait
+
+for i in $(ls|grep TCGA)
+do cd $i
+if [ $(ls|grep "clean"|wc -l) -gt 0 ]
+then
+echo "$i  bbduck_bash already done"
+cd ../
+continue
+fi
+echo "$i bbduck_bash processing now"
+bash ../bbduck_bash
+echo "$i bbduck_bash  completed"
+cd ../
+done
+
+
+
+
+
+
+
+
+
+
+
+wait
+
+
+for i in $(ls|grep TCGA)
+do cd $i
+if [ $(ls|grep human.sam|wc -l) -gt 0 ]
+then
+echo "$i has been already done"
+cd ../
+continue
+fi
+echo "$i bowtie_bash processing now"
+bash ../bowtie_bash
+echo "$i bowtie_bash completed"
+cd ../
+done
+
+echo "bowtie bash completed"
+
+
+
+
+wait
+
+for i in $(ls|grep TCGA)
+do cd $i
+if [ $(ls|grep f_last.fq|wc -l) -gt 0 ]
+then
+echo "$i last_unmapped already done"
+cd ../
+continue
+fi
+echo "$i last_unmapped processing now"
+bash ../last_unmapped_bash
+echo "$i last_unmapped completed"
+cd ../
+done
+
+
+wait
+
+for i in $(ls|grep TCGA)
+do cd $i
+if [ $(ls|grep megahit|wc -l) -gt 0 ]
+then
+echo "$i already done"
+cd ../
+continue
+fi
+echo "$i processing now"
+bash ../megahit_bash
+echo "$i completed"
+cd ../
+done
+
+
+

@@ -1,0 +1,2 @@
+bbduk.sh in1=f.fq in2=r.fq out1=clean1.fq out2=clean2.fq entropy=0.6  -Xmx100g
+rm f.fq r.fq

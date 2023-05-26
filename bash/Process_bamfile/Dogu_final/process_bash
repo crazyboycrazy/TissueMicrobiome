@@ -1,0 +1,26 @@
+wget https://raw.githubusercontent.com/JUNWOOJOK/bash_code/main/adapter
+trimmomatic PE -threads 7  forward.fq reverse.fq forward_paired.fq forward_unpaired.fq reverse_paired.fq reverse_unpaired.fq ILLUMINACLIP:adapter:2:30:7 MINLEN:38 TRAILING:20 AVGQUAL:20 SLIDINGWINDOW:20:20
+
+if [ $?==1 ]
+echo "phred33"
+then
+vsearch --fastq_chars reverse.fq  2>output
+fi
+
+if [ $(cat output |grep "Guess: Illumina"|grep phred+33|wc -c) -gt 10 ]
+then
+echo "phred 33 detected and  trimmomatic start"
+trimmomatic PE -threads 10 -phred33  forward.fq reverse.fq forward_paired.fq forward_unpaired.fq reverse_paired.fq reverse_unpaired.fq ILLUMINACLIP:adapter:2:30:7 MINLEN:38 TRAILING:20 AVGQUAL:20 SLIDINGWINDOW:20:20
+fi
+
+
+
+
+
+wait
+rm adapter*
+mkdir fastqfile
+mv forward.fq reverse.fq singleton.fq fastqfile/
+mv forward_paired.fq  f.fq
+mv reverse_paired.fq  r.fq
+rm forward_unpaired.fq reverse_unpaired.fq
