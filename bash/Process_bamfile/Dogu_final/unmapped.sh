@@ -17,8 +17,6 @@ else
 echo "$i unmapping already done"
 fi
 
-echo 123
-
 if [ ! -s unmapped.fastq ]
 then
 echo "$i samtools fastq processing"
