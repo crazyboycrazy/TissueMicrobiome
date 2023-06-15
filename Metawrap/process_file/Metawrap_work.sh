@@ -12,7 +12,11 @@ metawrap binning -a output_megahit/final.contigs.fa -o metawrap_out -t 9 -m 100 
 metawrap bin_refinement -o output_refinement -t 9 -m 80 -A concoct_bins/ -B maxbin2_bins/ -C metabat2_bins/
 
 #calssify (GTDBTK)
+metawrap  classify_bins -b refined.bin.dir -o metawrap_classify
+gtdbtk classify_wf --genome_dir <my_genomes> --out_dir <output_dir>
 
 
 #metawrap quant
 metawrap quant_bins -b outut_metarwrap/output_refinement/metawrap_70_10_bins/ -a  output_megahit/final.contigs.fa -o quant_output   -t 9 *TCGA*/*fastq
+
+
