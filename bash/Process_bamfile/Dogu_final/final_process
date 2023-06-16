@@ -1,7 +1,7 @@
 #!/bin/bash
 
 # 확인할 도구들의 리스트
-tools=("prodigal" "samtools" "megahit" "bbduk.sh" "repair.sh" "bowtie2" "trimmomatic")
+tools=("prodigal" "samtools" "megahit" "bbduk.sh" "repair.sh" "bowtie2" "trimmomatic", "vsearch")
 
 # 도구 실행 가능 여부 확인
 for tool in "${tools[@]}"; do
